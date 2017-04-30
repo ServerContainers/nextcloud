@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  nextcloud-mysql:
+    image: servercontainers/mysql
+    restart: always
+    environment:
+      ADMIN_USER: mysql_admin
+      ADMIN_PASSWORD: SuperSecure
+      BACKUP_ENABLED: enable
+      DB_NAME: nextcloud
+      DB_USER: nextcloud
+      DB_PASSWORD: NextCloud
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/backup:/var/mysql-backup
+    networks:
+      - nextcloud
+
+  nextcloud:
+    build: .
+    image: servercontainers/nextcloud
+    restart: always
+    environment:
+      RELATIVE_URL: /nextcloud
+      CUSTOM_PLUGINS: calendar contacts mail gallery audioplayer deck notes bookmarks
+
+      ADMIN_NAME: nc-admin
+      ADMIN_PASSWORD: Secr3t
+
+      DB_HOST: nextcloud-mysql
+      DB_TYPE: mysql
+      DB_NAME: nextcloud
+      DB_USER: nextcloud
+      DB_PASSWORD: NextCloud
+    volumes:
+      - ./nextcloud/apps:/var/www/nextcloud/apps
+      - ./nextcloud/config:/var/www/nextcloud/config
+      - ./nextcloud/data:/var/www/nextcloud/data
+    ports:
+      - 443:443
+    networks:
+      - nextcloud
+
+networks:
+  nextcloud:
+    driver: bridge
