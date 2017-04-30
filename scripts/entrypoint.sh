@@ -88,7 +88,7 @@ then
   if [ ! -z ${CUSTOM_PLUGINS+x} ]
   then
     echo "  >> installing custom plugins"
-    for plugin in "$CUSTOM_PLUGINS"
+    for plugin in $CUSTOM_PLUGINS
     do
       nextcloud-plugin-download.sh "$plugin"
     done
