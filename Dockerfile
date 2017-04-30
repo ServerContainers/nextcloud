@@ -65,6 +65,10 @@ RUN apt-get -q -y update \
  && sed -i 's/;default_charset = "UTF-8"/default_charset = "UTF-8"/g' /etc/php5/apache2/php.ini \
  && sed -i 's/memory_limit = 128M/memory_limit = 256M/g' /etc/php5/apache2/php.ini \
  \
+ && sed -i 's/^post_max_size =.*/post_max_size = 0/g' /etc/php5/apache2/php.ini \
+ && sed -i 's/^upload_max_filesize =.*/upload_max_filesize = 55G/g' /etc/php5/apache2/php.ini \
+ && sed -i 's/^max_file_uploads =.*/max_file_uploads = 100/g' /etc/php5/apache2/php.ini \
+ \
  && chown www-data:www-data -R /var/www/nextcloud/ \
  && chmod -R a+rw /var/www/nextcloud/data \
  && cp -a /var/www/nextcloud/data /var/www/nextcloud/data.bak \
