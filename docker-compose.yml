@@ -18,11 +18,13 @@ services:
       - nextcloud
 
   nextcloud-onlyoffice:
-    image: onlyoffice/documentserver
+    build: ./onlyoffice-documentserver
+    image: localhost/documentserver
     restart: always
-    stdin_open: true
+    environment:
+      SECRET: secret
     ports:
-      - 80:80
+      - 443:443
     networks:
       - nextcloud
 
