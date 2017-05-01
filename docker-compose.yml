@@ -20,7 +20,9 @@ services:
   nextcloud-onlyoffice:
     image: onlyoffice/documentserver
     restart: always
-    command: bash -c '/app/onlyoffice/run-document-server.sh; sleep 120; tail -f /var/log/onlyoffice/*'
+    stdin_open: true
+    ports:
+      - 80:80
     networks:
       - nextcloud
 
