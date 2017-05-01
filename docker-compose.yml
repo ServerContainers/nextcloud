@@ -17,13 +17,20 @@ services:
     networks:
       - nextcloud
 
+  nextcloud-onlyoffice:
+    image: onlyoffice/documentserver
+    restart: always
+    command: bash -c '/app/onlyoffice/run-document-server.sh; sleep 120; tail -f /var/log/onlyoffice/*'
+    networks:
+      - nextcloud
+
   nextcloud:
     build: .
     image: servercontainers/nextcloud
     restart: always
     environment:
       RELATIVE_URL: /nextcloud
-      CUSTOM_PLUGINS: calendar contacts mail gallery audioplayer deck notes bookmarks
+      CUSTOM_PLUGINS: calendar contacts mail gallery audioplayer deck notes onlyoffice bookmarks
 
       ADMIN_NAME: nc-admin
       ADMIN_PASSWORD: Secr3t

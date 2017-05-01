@@ -12,7 +12,7 @@ fi
 
 if [ ! -d "/var/www/nextcloud/apps/$PLUGIN" ]
 then
-  DOWNLOAD_URL=$(wget -O - "https://apps.nextcloud.com/apps/$PLUGIN" 2> /dev/null | grep "$PLUGIN.tar.gz" | head -n1 | cut -d'"' -f2)
+  DOWNLOAD_URL=$(wget -O - "https://apps.nextcloud.com/apps/$PLUGIN" 2> /dev/null | tr '\n' ' ' | sed -e 's,.*Downloads,,g' -e 's,/section.*,,g' | tr '>' '\n' | grep 'noopener' | cut -d'"' -f2 | head -n1)
 
   cd /var/www/nextcloud/apps/
   echo "  >> downloading plugin '$PLUGIN'"
