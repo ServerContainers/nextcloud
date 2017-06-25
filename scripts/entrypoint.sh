@@ -99,7 +99,7 @@ then
   cd -
 
   # BACKUP Folders from installation 
-  if [ ! -z ${KEEP_INSTALLATION_FOLDERS+x} ]
+  if [ -z ${KEEP_INSTALLATION_FOLDERS+x} ]
   then
     echo ">> removing files from installation"
     rm -rf /var/www/nextcloud/*.bak
