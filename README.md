@@ -39,6 +39,8 @@ View in GitHub [ServerContainers/nextcloud](https://github.com/ServerContainers/
     * default none - name for the admin user for the nextcloud installation
 * __ADMIN\_PASSWORD__
     * default none - password for the admin user for the nextcloud installation
+* __KEEP\_INSTALLATION\_FOLDERS__
+    * default none - if set to any value, the installation folders config.bak apps.bak and data.bak will be kept (makes troubles with code analysis)
 
 ## DB Connection
 
