@@ -9,8 +9,8 @@ RUN openssl dhparam -out "$SSL_DHPARAM_PATH" 1024 \
     -subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=localhost" \
     -keyout "$SSL_KEY_PATH" \
     -out "$SSL_CERTIFICATE_PATH" \
-    -days 3650 -nodes -sha256 \
- && echo 'sed -i '"'"'s,: "secret",: "'"'"\$SECRET"'"'",g'"'"' /etc/onlyoffice/documentserver/default.json' > /app/onlyoffice/run-secret.sh \
- && chmod a+x /app/onlyoffice/run-secret.sh
+    -days 3650 -nodes -sha256
 
-CMD bash -c '/app/onlyoffice/run-secret.sh; /app/onlyoffice/run-document-server.sh; while true; do sleep 1d; done'
+COPY add-secret.sh /app/onlyoffice/
+
+CMD bash -c '/app/onlyoffice/add-secret.sh; /app/onlyoffice/run-document-server.sh; while true; do sleep 1d; done'
