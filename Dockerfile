@@ -1,6 +1,6 @@
-FROM debian:jessie
+FROM debian:stretch
 
-ENV NEXTCLOUD_VERSION 12.0.5
+ENV NEXTCLOUD_VERSION 13.0.0
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
