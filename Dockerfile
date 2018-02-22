@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:jessie
 
 ENV NEXTCLOUD_VERSION 13.0.0
 ENV LANG C.UTF-8
